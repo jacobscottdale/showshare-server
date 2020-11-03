@@ -14,9 +14,22 @@ accountsRouter
       })
       .catch(next);
   })
-  .post(bodyParser, (req, res) => {
-    const knexInstance = req.app.post
-  })
+  .post(bodyParser, (req, res, next) => {
+    const { first_name, last_name, username, password } = req.body;
+    const created_on = new Date();
+    const newAccount = { first_name, last_name, username, password, created_on };
+    AccountsService.createAccount(
+      req.app.get('db'),
+      newAccount
+    )
+      .then(account => {
+        res
+        .status(201)
+        .location(`/api/accounts/${account.id}`)
+        .json(account);
+      })
+      .catch(next);
+  });
 
 accountsRouter
   .route('/api/accounts/:id')
@@ -27,7 +40,7 @@ accountsRouter
         if (!account) {
           return res.status(404).json({
             error: { message: `Account doesn't exist` }
-          })
+          });
         }
         res.json(account);
       })
