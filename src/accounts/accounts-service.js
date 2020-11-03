@@ -8,12 +8,24 @@ const AccountsService = {
       .insert(newAccount)
       .into('accounts')
       .returning('*')
-      .then(rows => rows[0])
+      .then(rows => rows[0]);
   },
 
   getById(knex, id) {
     return knex.from('accounts').select('*').where('user_id', id).first();
   },
-}
 
-module.exports = AccountsService
+  deleteAccount(knex, id) {
+    return knex('accounts')
+      .where({ id })
+      .delete();
+  },
+
+  updateAccount(knex, id, newAccountFields) {
+    return knex('accounts')
+      .where({ id })
+      .update(newAccountFields);
+  },
+};
+
+module.exports = AccountsService;

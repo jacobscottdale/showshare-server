@@ -1,4 +1,5 @@
 const express = require('express');
+const { end } = require('../logger');
 const logger = require('../logger');
 const AccountsService = require('./accounts-service');
 const accountsRouter = express.Router();
@@ -45,6 +46,13 @@ accountsRouter
         res.json(account);
       })
       .catch(next);
+  })
+  .delete((req, res, next) => {
+    AccountsService.deleteAccount(
+      req.app.get('db'),
+      req.params.id
+    )
+    res.status(204).end()
   });
 
 module.exports = accountsRouter;
