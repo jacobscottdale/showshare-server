@@ -5,3 +5,7 @@
 {"message":"insert into \"accounts\" (\"first_name\", \"last_name\", \"password\", \"username\") values ($1, $2, $3, $4) returning * - null value in column \"created_on\" of relation \"accounts\" violates not-null constraint","level":"error"}
 {"message":"insert into \"accounts\" (\"first_name\", \"last_name\", \"password\", \"username\") values (DEFAULT, DEFAULT, DEFAULT, DEFAULT) returning * - null value in column \"username\" of relation \"accounts\" violates not-null constraint","level":"error"}
 {"message":"authToken.toLowerCase(...).startWith is not a function","level":"error"}
+{"message":"insert into \"accounts\" (\"first_name\", \"last_name\", \"password\", \"username\") values (DEFAULT, DEFAULT, $1, $2) returning * - null value in column \"first_name\" of relation \"accounts\" violates not-null constraint","level":"error"}
+{"message":"config is not defined","level":"error"}
+{"message":"AuthService.getUserWithUserName is not a function","level":"error"}
+{"message":"AuthService.getUserWithUserName is not a function","level":"error"}
