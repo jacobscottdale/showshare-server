@@ -17,7 +17,7 @@ const AccountsService = {
 
   deleteAccount(knex, id) {
     return knex('accounts')
-      .where({ id })
+      .where({ 'user_id': id })
       .delete();
   },
 
