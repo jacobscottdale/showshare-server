@@ -27,8 +27,10 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.12",
     "morgan": "^1.10.0",
+    "path": "^0.12.7",
     "pg": "^8.4.2",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "xss": "^1.0.8"
   },
   "devDependencies": {
     "chai": "^4.2.0",

@@ -9,3 +9,12 @@
 {"message":"config is not defined","level":"error"}
 {"message":"AuthService.getUserWithUserName is not a function","level":"error"}
 {"message":"AuthService.getUserWithUserName is not a function","level":"error"}
+{"message":"res.status(...).json(...) is not a function","level":"error"}
+{"message":"path is not defined","level":"error"}
+{"message":"path is not defined","level":"error"}
+{"message":"path is not defined","level":"error"}
+{"message":"path is not defined","level":"error"}
+{"message":"path is not defined","level":"error"}
+{"message":"path is not defined","level":"error"}
+{"message":"res.status(...).location(...).then is not a function","level":"error"}
+{"message":"Cannot read property 'log' of undefined","level":"error"}
