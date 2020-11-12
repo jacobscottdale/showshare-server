@@ -1,11 +1,13 @@
 const express = require('express');
 const AuthService = require('./auth-service');
+const { requireAuth } = require('../middleware/jwt-auth');
 
 const authRouter = express.Router();
 const jsonBodyParser = express.json();
 
 authRouter
-  .post('/login', jsonBodyParser, (req, res, next) => {
+  .route('/login')
+  .post(jsonBodyParser, (req, res, next) => {
     const { username, password } = req.body;
     const loginUser = { username, password };
 
@@ -38,6 +40,12 @@ authRouter
           });
       })
       .catch(next);
+  })
+
+authRouter
+  .route('/verify-token')
+  .get(requireAuth, (req, res, next) => {
+    res.json({ ok: true });
   });
 
 module.exports = authRouter;

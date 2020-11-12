@@ -3,6 +3,7 @@ const { end } = require('../middleware/logger');
 const logger = require('../middleware/logger');
 const path = require('path');
 const AccountsService = require('./accounts-service');
+const AuthService = require('../auth/auth-service');
 const accountsRouter = express.Router();
 const bodyParser = express.json();
 const { requireAuth } = require('../middleware/jwt-auth');
@@ -53,10 +54,31 @@ accountsRouter
               newAccount
             )
               .then(account => {
-                res
-                  .status(201)
-                  .location(path.posix.join(req.originalUrl, `/${account.user_id}`))
-                  .json(AccountsService.serializeAccount(account));
+                return AuthService.getUserWithUsername(
+                  req.app.get('db'),
+                  account.username
+                )
+                  .then(dbUser => {
+                    if (!dbUser)
+                      return res.status(400).json({
+                        error: 'Incorrect username or password',
+                      });
+                    return AuthService.comparePasswords(password, dbUser.password)
+                      .then(compareMatch => {
+                        if (!compareMatch)
+                          return res.status(400).json({
+                            error: 'Incorrect username or password',
+                          });
+                        const sub = dbUser.username;
+                        const payload = { user_id: dbUser.user_id };
+                        res
+                          .status(201)
+                          .location(path.posix.join(req.originalUrl, `/${account.user_id}`))
+                          .send({
+                            authToken: AuthService.createJwt(sub, payload),
+                          });
+                      });
+                  });
               });
           });
       })

@@ -18,3 +18,5 @@
 {"message":"path is not defined","level":"error"}
 {"message":"res.status(...).location(...).then is not a function","level":"error"}
 {"message":"Cannot read property 'log' of undefined","level":"error"}
+{"message":"Invalid status code: {\n  user_id: 23,\n  first_name: 'Jacob',\n  last_name: 'Dale',\n  username: 'testing222',\n  date_created: 2020-11-12T15:48:49.903Z\n}","level":"error"}
+{"message":"Cannot set headers after they are sent to the client","level":"error"}
