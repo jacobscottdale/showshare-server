@@ -1,5 +1,5 @@
-const xss = require('xss')
-const bcrypt = require('bcryptjs')
+const xss = require('xss');
+const bcrypt = require('bcryptjs');
 
 const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/;
 
@@ -43,16 +43,16 @@ const AccountsService = {
       return 'Password must must not start or end with empty spaces';
     }
     if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(password)) {
-      return 'Password must contain at least 1 upper case, lower case, number and special character'
+      return 'Password must contain at least 1 upper case, lower case, number and special character';
     }
-    return null
+    return null;
   },
 
   usernameInUse(db, username) {
     return db('accounts')
       .where({ username })
       .first()
-      .then(user => !!user)
+      .then(user => !!user);
   },
 
   serializeAccount(account) {
@@ -62,11 +62,11 @@ const AccountsService = {
       last_name: account.last_name,
       username: account.username,
       date_created: new Date(account.created_on),
-    }
+    };
   },
 
   hashPassword(password) {
-    return bcrypt.hash(password, 10)
+    return bcrypt.hash(password, 10);
   },
 };
 

@@ -20,3 +20,21 @@
 {"message":"Cannot read property 'log' of undefined","level":"error"}
 {"message":"Invalid status code: {\n  user_id: 23,\n  first_name: 'Jacob',\n  last_name: 'Dale',\n  username: 'testing222',\n  date_created: 2020-11-12T15:48:49.903Z\n}","level":"error"}
 {"message":"Cannot set headers after they are sent to the client","level":"error"}
+{"message":"Undefined binding(s) detected when compiling FIRST. Undefined column(s): [trakt_id] query: select * from \"show\" where \"trakt_id\" = ? limit ?","level":"error"}
+{"message":"Undefined binding(s) detected when compiling FIRST. Undefined column(s): [trakt_id] query: select * from \"show\" where \"trakt_id\" = ? limit ?","level":"error"}
+{"message":"Undefined binding(s) detected when compiling FIRST. Undefined column(s): [trakt_id] query: select * from \"show\" where \"trakt_id\" = ? limit ?","level":"error"}
+{"message":"Cannot destructure property 'trakt_id' of 'req.body' as it is undefined.","level":"error"}
+{"message":"Cannot destructure property 'trakt_id' of 'req.body' as it is undefined.","level":"error"}
+{"message":"Cannot destructure property 'trakt_id' of 'req.body' as it is undefined.","level":"error"}
+{"message":"Cannot destructure property 'trakt_id' of 'req.body' as it is undefined.","level":"error"}
+{"message":"Cannot read property 'trakt_id' of undefined","level":"error"}
+{"message":"Cannot read property 'trakt_id' of undefined","level":"error"}
+{"message":"fetch is not defined","level":"error"}
+{"message":"Cannot read property 'then' of undefined","level":"error"}
+{"message":"Cannot read property 'then' of undefined","level":"error"}
+{"message":"Cannot read property 'then' of undefined","level":"error"}
+{"message":"Cannot read property 'then' of undefined","level":"error"}
+{"message":"insert into \"show\" (\"aired_episodes\", \"imdb_id\", \"network\", \"overview\", \"slug\", \"status\", \"title\", \"trakt_id\", \"updated_at\", \"year\") values ($1, DEFAULT, $2, $3, $4, $5, $6, $7, $8, $9) returning * - null value in column \"imdb_id\" of relation \"show\" violates not-null constraint","level":"error"}
+{"message":"insert into \"show\" (\"aired_episodes\", \"imdb_id\", \"network\", \"overview\", \"slug\", \"status\", \"title\", \"trakt_id\", \"updated_at\", \"year\") values ($1, DEFAULT, $2, $3, $4, $5, $6, $7, $8, $9) returning * - null value in column \"imdb_id\" of relation \"show\" violates not-null constraint","level":"error"}
+{"message":"insert into \"show\" (\"aired_episodes\", \"imdb_id\", \"network\", \"overview\", \"slug\", \"status\", \"title\", \"trakt_id\", \"updated_at\", \"year\") values ($1, DEFAULT, $2, $3, $4, $5, $6, $7, $8, $9) returning * - null value in column \"imdb_id\" of relation \"show\" violates not-null constraint","level":"error"}
+{"message":"insert into \"show\" (\"aired_episodes\", \"imdb_id\", \"network\", \"overview\", \"slug\", \"status\", \"title\", \"trakt_id\", \"updated_at\", \"year\") values ($1, DEFAULT, $2, $3, $4, $5, $6, $7, $8, $9) returning * - null value in column \"imdb_id\" of relation \"show\" violates not-null constraint","level":"error"}

@@ -89,7 +89,7 @@ accountsRouter
   .route('/:id')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db');
-    AccountsService.getById(knexInstance, req.params.user_id)
+    AccountsService.getById(knexInstance, req.params.id)
       .then(account => {
         if (!account) {
           return res.status(404).json({
@@ -102,7 +102,7 @@ accountsRouter
   })
   .delete(requireAuth, (req, res, next) => {
     const knexInstance = req.app.get('db');
-    AccountsService.getById(knexInstance, req.params.user_id)
+    AccountsService.getById(knexInstance, req.params.id)
       .then(account => {
         if (!account) {
           return res.status(404).json({
