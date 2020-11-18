@@ -12,6 +12,7 @@ accountShowRouter
   .get(requireAuth, (req, res, next) => {
     AccountShowService.getUserShows(req.app.get('db'), req.params.id)
       .then(shows => {
+        // AccountShowService.getShowDetails() not returning a promise
         AccountShowService.getShowDetails(req.app.get('db'), shows)
           .then(showDetails => res.json(showDetails))
       })

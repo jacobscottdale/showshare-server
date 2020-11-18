@@ -9,6 +9,7 @@ const AccountShowService = {
   },
 
   getShowDetails(db, shows) {
+    // AccountShowService.getShowDetails() not returning a promise
     const showDetails = shows.map(show => {
       const details = db
         .from('show')
