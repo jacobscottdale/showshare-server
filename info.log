@@ -38,3 +38,20 @@
 {"message":"insert into \"show\" (\"aired_episodes\", \"imdb_id\", \"network\", \"overview\", \"slug\", \"status\", \"title\", \"trakt_id\", \"updated_at\", \"year\") values ($1, DEFAULT, $2, $3, $4, $5, $6, $7, $8, $9) returning * - null value in column \"imdb_id\" of relation \"show\" violates not-null constraint","level":"error"}
 {"message":"insert into \"show\" (\"aired_episodes\", \"imdb_id\", \"network\", \"overview\", \"slug\", \"status\", \"title\", \"trakt_id\", \"updated_at\", \"year\") values ($1, DEFAULT, $2, $3, $4, $5, $6, $7, $8, $9) returning * - null value in column \"imdb_id\" of relation \"show\" violates not-null constraint","level":"error"}
 {"message":"insert into \"show\" (\"aired_episodes\", \"imdb_id\", \"network\", \"overview\", \"slug\", \"status\", \"title\", \"trakt_id\", \"updated_at\", \"year\") values ($1, DEFAULT, $2, $3, $4, $5, $6, $7, $8, $9) returning * - null value in column \"imdb_id\" of relation \"show\" violates not-null constraint","level":"error"}
+{"message":"select * from \"show\" where \"trakt_id\" = $1 limit $2 - invalid input syntax for type integer: \"search\"","level":"error"}
+{"message":"select * from \"show\" where \"trakt_id\" = $1 limit $2 - invalid input syntax for type integer: \"search\"","level":"error"}
+{"message":"The operator \"undefined\" is not permitted","level":"error"}
+{"message":"The operator \"undefined\" is not permitted","level":"error"}
+{"message":"The operator \"undefined\" is not permitted","level":"error"}
+{"message":"The operator \"undefined\" is not permitted","level":"error"}
+{"message":"watch_status is not defined","level":"error"}
+{"message":"AccountShowService.getShowDetails(...).then is not a function","level":"error"}
+{"message":"AccountShowService.getShowDetails(...).then is not a function","level":"error"}
+{"message":"Cannot access 'showDetails' before initialization","level":"error"}
+{"message":"AccountShowService.getShowDetails(...).then is not a function","level":"error"}
+{"message":"Converting circular structure to JSON\n    --> starting at object with constructor 'Timeout'\n    |     property '_idlePrev' -> object with constructor 'TimersList'\n    --- property '_idleNext' closes the circle","level":"error"}
+{"message":"AccountShowService.getShowDetails(...).then is not a function","level":"error"}
+{"message":"AccountShowService.getShowDetails(...).then is not a function","level":"error"}
+{"message":"db is not defined","level":"error"}
+{"message":"AccountShowService.getShowDetails(...).then is not a function","level":"error"}
+{"message":"Converting circular structure to JSON\n    --> starting at object with constructor 'Timeout'\n    |     property '_idlePrev' -> object with constructor 'TimersList'\n    --- property '_idleNext' closes the circle","level":"error"}

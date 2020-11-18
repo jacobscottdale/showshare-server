@@ -1,0 +1,1 @@
+psql -U dunder_mifflin -d showshare -f ./seeds/*.sql

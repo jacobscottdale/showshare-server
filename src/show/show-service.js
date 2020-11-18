@@ -59,12 +59,29 @@ const ShowService = {
           aired_episodes: data.aired_episodes,
           status: data.status
         }
-          
       })
       .catch(err => {
         console.log(err);
       });
   },
+
+  fetchSearch(searchTerm) {
+    return fetch(`${config.TRAKT_API_URL}/search/show?query=${searchTerm}`, {
+      headers: {
+        'Content-type': 'application/json',
+        'trakt-api-key': config.TRAKT_API_KEY,
+        'trakt-api-version': '2'
+      }
+    })
+      .then(res => {
+        if (!res.ok)
+          throw new Error('Network response was not ok');
+        return res.json();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 };
 
 module.exports = ShowService;

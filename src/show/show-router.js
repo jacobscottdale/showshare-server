@@ -31,7 +31,7 @@ showRouter
       .then(idInUse => {
         if (idInUse)
           return res.status(400).json({ error: 'Show already exists in database' });
-        return ShowService.insertShow(req.app.get('db'), req.body)
+        ShowService.insertShow(req.app.get('db'), req.body)
           .then(show => {
             return res.status(201)
               .location(path.posix.join(req.originalUrl, `/${show.trakt_id}`))
@@ -54,9 +54,9 @@ showRouter
           console.log('show not in db')
           ShowService.fetchShow(showId)
             .then(fetchedShow => {
-              return ShowService.insertShow(req.app.get('db'), fetchedShow)
+              ShowService.insertShow(req.app.get('db'), fetchedShow)
                 .then(insertedShow => {
-                  res.json(insertedShow);
+                  return res.json(insertedShow);
                 });
             })
             .catch(next)
@@ -67,5 +67,17 @@ showRouter
       })
       .catch(next);
   });
+
+showRouter
+  .route('/search/:searchTerm')
+  .get((req, res, next) => {
+    const { searchTerm } = req.params
+    ShowService.fetchSearch(searchTerm)
+      .then(showResults => {
+        console.log(showResults)
+        return res.json(showResults)
+      })
+      
+  })
 
 module.exports = showRouter;
