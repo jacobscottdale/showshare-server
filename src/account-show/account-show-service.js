@@ -8,21 +8,18 @@ const AccountShowService = {
       .where('user_id', user_id)
   },
 
-  getShowDetails(db, shows) {
-    // AccountShowService.getShowDetails() not returning a promise
-    const showDetails = shows.map(show => {
-      const details = db
+  getShowDetails(db, show) {
+    return db
         .from('show')
         .select('*')
         .where('trakt_id', show.trakt_id)
-        .first();
-
-      details.watch_status = show.watch_status;
-      return details;
-
-    });
-    console.log(showDetails)
-    return showDetails
+        .first()
+        .then(showDetail => {
+          return {
+            ...showDetail,
+            watch_status: show.watch_status
+          }
+        });
   }
 };
 
