@@ -29,10 +29,6 @@ const ShowService = {
       .then(show => !!show);
   },
 
-  updateShow(db, id, newShowField) {
-
-  },
-
   fetchShow(id) {
     return fetch(`${config.TRAKT_API_URL}/shows/${id}?extended=full`, {
       headers: {
