@@ -22,30 +22,34 @@ const AccountShowService = {
       });
   },
 
-  insertUserShow(db, newUserShow) {
+  insertUserShow(db, user_id, trakt_id, watch_status) {
     return db
-      .insert(newUserShow)
+      .insert({
+        user_id: user_id,
+        trakt_id: trakt_id,
+        watch_status: watch_status
+      })
       .into('account_has_show')
       .returning('*')
       .then(([userShow]) => userShow);
   },
 
-  updateWatchStatus(db, userShow) {
+  updateWatchStatus(db, user_id, trakt_id, watch_status) {
     return db('account_has_show')
       .where({
-        user_id: userShow.user_id,
-        trakt_id: userShow.trakt_id
+        user_id: user_id,
+        trakt_id: trakt_id
       })
-      .update('watch_status', userShow.watch_status)
+      .update('watch_status', watch_status)
       .returning('*')
       .then(([userShow]) => userShow);
   },
 
-  removeUserShow(db, userShow) {
+  removeUserShow(db, user_id, trakt_id) {
     return db('account_has_show')
       .where({
-        user_id: userShow.user_id,
-        trakt_id: userShow.trakt_id
+        user_id: user_id,
+        trakt_id: trakt_id
       })
       .delete();
   }

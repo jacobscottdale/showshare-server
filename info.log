@@ -74,3 +74,22 @@
 {"message":"Empty .update() call detected! Update data does not contain any values to update. This will result in a faulty query. Table: account_has_show. Columns: watch_status.","level":"error"}
 {"message":"Empty .update() call detected! Update data does not contain any values to update. This will result in a faulty query. Table: account_has_show. Columns: watch_status.","level":"error"}
 {"message":"Empty .update() call detected! Update data does not contain any values to update. This will result in a faulty query. Table: account_has_show. Columns: watch_status.","level":"error"}
+{"message":"Unexpected token o in JSON at position 1","level":"error"}
+{"message":"Unexpected token o in JSON at position 1","level":"error"}
+{"message":"Unexpected token o in JSON at position 1","level":"error"}
+{"message":"Unexpected token o in JSON at position 1","level":"error"}
+{"message":"Unexpected token o in JSON at position 1","level":"error"}
+{"message":"Unexpected token o in JSON at position 1","level":"error"}
+{"message":"Unexpected token o in JSON at position 1","level":"error"}
+{"message":"Unexpected token o in JSON at position 1","level":"error"}
+{"message":"Unexpected token o in JSON at position 1","level":"error"}
+{"message":"select \"trakt_id\", \"watch_status\" from \"account_has_show\" where \"user_id\" = $1 - invalid input syntax for type integer: \"undefined\"","level":"error"}
+{"message":"select \"trakt_id\", \"watch_status\" from \"account_has_show\" where \"user_id\" = $1 - invalid input syntax for type integer: \"undefined\"","level":"error"}
+{"message":"select \"trakt_id\", \"watch_status\" from \"account_has_show\" where \"user_id\" = $1 - invalid input syntax for type integer: \"undefined\"","level":"error"}
+{"message":"select \"trakt_id\", \"watch_status\" from \"account_has_show\" where \"user_id\" = $1 - invalid input syntax for type integer: \"undefined\"","level":"error"}
+{"message":"select \"trakt_id\", \"watch_status\" from \"account_has_show\" where \"user_id\" = $1 - invalid input syntax for type integer: \"undefined\"","level":"error"}
+{"message":"select \"trakt_id\", \"watch_status\" from \"account_has_show\" where \"user_id\" = $1 - invalid input syntax for type integer: \"undefined\"","level":"error"}
+{"message":"select \"trakt_id\", \"watch_status\" from \"account_has_show\" where \"user_id\" = $1 - invalid input syntax for type integer: \"undefined\"","level":"error"}
+{"message":"select \"trakt_id\", \"watch_status\" from \"account_has_show\" where \"user_id\" = $1 - invalid input syntax for type integer: \"undefined\"","level":"error"}
+{"message":"select \"trakt_id\", \"watch_status\" from \"account_has_show\" where \"user_id\" = $1 - invalid input syntax for type integer: \"undefined\"","level":"error"}
+{"message":"select \"trakt_id\", \"watch_status\" from \"account_has_show\" where \"user_id\" = $1 - invalid input syntax for type integer: \"undefined\"","level":"error"}

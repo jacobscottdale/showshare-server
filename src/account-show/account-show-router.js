@@ -8,9 +8,10 @@ const bodyParser = express.json();
 const { requireAuth } = require('../middleware/jwt-auth');
 
 accountShowRouter
-  .route('/:id')
+  .route('/')
   .get(requireAuth, (req, res, next) => {
-    AccountShowService.getUserShows(req.app.get('db'), req.params.id)
+    console.log(req.user.user_id);
+    AccountShowService.getUserShows(req.app.get('db'), req.user.user_id)
       .then(userShows => {
         let showPromise = userShows.map(userShow =>
           AccountShowService.getShowDetails(req.app.get('db'), userShow));
@@ -23,18 +24,18 @@ accountShowRouter
         .json(shows)
       )
       .catch(next);
-  });
-
-
-accountShowRouter
-  .route('/')
+  })
   .post(requireAuth, bodyParser, (req, res, next) => {
-    for (const field of ['user_id', 'trakt_id', 'watch_status'])
+    for (const field of ['trakt_id', 'watch_status'])
       if (!req.body[field])
         return res.status(400).json({
           error: `Missing '${field}' in request body`
         });
-    AccountShowService.insertUserShow(req.app.get('db'), req.body)
+
+    const user_id = req.user.user_id;
+    const { trakt_id, watch_status } = req.body;
+
+    AccountShowService.insertUserShow(req.app.get('db'), user_id, trakt_id, watch_status)
       .then(userShow =>
         res.status(201)
           .location(path.posix.join(req.originalUrl, `/${userShow.user_id}`))
@@ -43,12 +44,16 @@ accountShowRouter
       .catch(next);
   })
   .patch(requireAuth, bodyParser, (req, res, next) => {
-    for (const field of ['user_id', 'trakt_id', 'watch_status'])
+    for (const field of ['trakt_id', 'watch_status'])
       if (!req.body[field])
         return res.status(400).json({
           error: `Missing '${field}' in request body`
         });
-    AccountShowService.updateWatchStatus(req.app.get('db'), req.body)
+
+    const user_id = req.user.user_id;
+    const { trakt_id, watch_status } = req.body;
+
+    AccountShowService.updateWatchStatus(req.app.get('db'), user_id, trakt_id, watch_status)
       .then(userShow =>
         res.status(201)
           .location(path.posix.join(req.originalUrl, `/${userShow.user_id}`))
@@ -62,7 +67,11 @@ accountShowRouter
         return res.status(400).json({
           error: `Missing '${field}' in request body`
         });
-    AccountShowService.removeUserShow(req.app.get('db'), req.body)
+
+    const user_id = req.user.user_id;
+    const { trakt_id } = req.body;
+
+    AccountShowService.removeUserShow(req.app.get('db'), user_id, trakt_id)
       .then(() =>
         res.status(204).end())
       .catch(next);
