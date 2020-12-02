@@ -8,7 +8,9 @@ INSERT INTO show (
   network, 
   updated_at, 
   aired_episodes, 
-  status
+  status,
+  tmdb_id,
+  tmdb_image_path
   )
 VALUES
     (60842, 
@@ -20,7 +22,9 @@ VALUES
     'ABC Comedy',
     '2020-10-09T08:46:34.000Z',
     32,
-    'ended'
+    'ended',
+    61350,
+    '/dgzpboEMxpHVI3Isy5lZOCP2e6X.jpg'
     ),
     (145026, 
     'Watchmen', 
@@ -31,7 +35,9 @@ VALUES
     'HBO',
     '2020-09-29T17:40:00.000Z',
     9,
-    'ended'
+    'ended',
+    79788,
+    '/m8rWq3j73ZGhDuSCZWMMoE9ePH1.jpg'
     ),
     (123775, 
     'Dark', 
@@ -42,7 +48,9 @@ VALUES
     'Netflix',
     '2020-11-11T18:36:44.000Z',
     26,
-    'ended'
+    'ended',
+    70523,
+    '/apbrbWs8M9lyOpJYU5WXrpFbk1Z.jpg'
     ),
     (134752, 
     'The Masked Singer', 
@@ -53,7 +61,9 @@ VALUES
     'FOX',
     '2020-10-31T09:30:09.000Z',
     47,
-    'returning series'
+    'returning series',
+    84910,
+    '/y90vIG3LY7okHfF444hK1IgHnvg.jpg'
     ),
     (913, 
     'M*A*S*H', 
@@ -64,7 +74,9 @@ VALUES
     'CBS',
     '2020-10-13T09:06:36.000Z',
     251,
-    'ended'
+    'ended',
+    918,
+    '/6rhuM3oMoEWKxAdrm7IyM8oq8cC.jpg'
     ),
     (245, 
     'Avatar: The Last Airbender', 
@@ -75,6 +87,8 @@ VALUES
     'Nickelodeon',
     '2020-11-11T09:17:38.000Z',
     61,
-    'ended'
+    'ended',
+    246,
+    '/cHFZA8Tlv03nKTGXhLOYOLtqoSm.jpg'
     );
   

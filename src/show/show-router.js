@@ -1,11 +1,8 @@
 const express = require('express');
-const { end } = require('../middleware/logger');
-const logger = require('../middleware/logger');
 const path = require('path');
 const ShowService = require('./show-service');
 const showRouter = express.Router();
 const bodyParser = express.json();
-const { requireAuth } = require('../middleware/jwt-auth');
 
 showRouter
   .route('/')
@@ -21,7 +18,7 @@ showRouter
       .catch(next);
   })
   .post(bodyParser, (req, res, next) => {
-    for (const field of ['trakt_id', 'title', 'slug', 'imdb_id', 'year', 'overview', 'network', 'updated_at', 'aired_episodes', 'status'])
+    for (const field of ['trakt_id', 'title', 'slug', 'imdb_id', 'year', 'overview', 'network', 'updated_at', 'aired_episodes', 'status', 'tvdb_id'])
       if (!req.body[field])
         return res.status(400).json({
           error: `Missing '${field}' in request body`
@@ -51,17 +48,21 @@ showRouter
     )
       .then(dbShow => {
         if (!dbShow) {
-          console.log('show not in db')
+          // If show is not already in the database, fetch show details from trakt and insert into the database
           ShowService.fetchShow(showId)
             .then(fetchedShow => {
-              ShowService.insertShow(req.app.get('db'), fetchedShow)
-                .then(insertedShow => {
-                  return res.json(insertedShow);
+              ShowService.fetchShowImage(fetchedShow.trakt_id)
+                .then(tmdb_image_path => {
+                  const showObject = { ...fetchedShow, tmdb_image_path };
+                  ShowService.insertShow(req.app.get('db'), showObject)
+                    .then(insertedShow => {
+                      return res.json(insertedShow);
+                    });
                 });
             })
-            .catch(next)
+            .catch(next);
         } else {
-          console.log('show in db')
+          // If show is already in the database simply return the database entry
           return res.json(dbShow);
         }
       })
@@ -71,13 +72,13 @@ showRouter
 showRouter
   .route('/search/:searchTerm')
   .get((req, res, next) => {
-    const { searchTerm } = req.params
+    const { searchTerm } = req.params;
     ShowService.fetchSearch(searchTerm)
       .then(showResults => {
-        console.log(showResults)
-        return res.json(showResults)
-      })
-      
-  })
+        console.log(showResults);
+        return res.json(showResults);
+      });
+
+  });
 
 module.exports = showRouter;

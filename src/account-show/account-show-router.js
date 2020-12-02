@@ -1,6 +1,4 @@
 const express = require('express');
-const { end } = require('../middleware/logger');
-const logger = require('../middleware/logger');
 const path = require('path');
 const AccountShowService = require('./account-show-service');
 const accountShowRouter = express.Router();
@@ -34,7 +32,7 @@ accountShowRouter
 
     const user_id = req.user.user_id;
     const { trakt_id, watch_status } = req.body;
-
+    
     AccountShowService.insertUserShow(req.app.get('db'), user_id, trakt_id, watch_status)
       .then(userShow =>
         res.status(201)
@@ -62,11 +60,10 @@ accountShowRouter
       .catch(next);
   })
   .delete(requireAuth, bodyParser, (req, res, next) => {
-    for (const field of ['user_id', 'trakt_id'])
-      if (!req.body[field])
-        return res.status(400).json({
-          error: `Missing '${field}' in request body`
-        });
+    if (!req.body.trakt_id)
+      return res.status(400).json({
+        error: `Missing '${field}' in request body`
+      });
 
     const user_id = req.user.user_id;
     const { trakt_id } = req.body;

@@ -39,26 +39,43 @@ const ShowService = {
     })
       .then(res => {
         if (!res.ok)
-          throw new Error('Network response was not ok');
+          throw new Error('Trakt response was not ok');
         return res.json();
       })
-      .then(data => {
+      .then(traktData => {
         return {
-          trakt_id: data.ids.trakt,
-          title: data.title,
-          slug: data.ids.slug,
-          imdb_id: data.ids.imdb,
-          year: data.year,
-          overview: data.overview,
-          network: data.network,
-          updated_at: data.updated_at,
-          aired_episodes: data.aired_episodes,
-          status: data.status
-        }
+          trakt_id: traktData.ids.trakt,
+          title: traktData.title,
+          slug: traktData.ids.slug,
+          imdb_id: traktData.ids.imdb,
+          year: traktData.year,
+          overview: traktData.overview,
+          network: traktData.network,
+          updated_at: traktData.updated_at,
+          aired_episodes: traktData.aired_episodes,
+          status: traktData.status,
+          tmdb_id: traktData.ids.tvdb
+        };
       })
       .catch(err => {
         console.log(err);
       });
+  },
+
+  fetchShowImage(tmdb_id) {
+    return fetch(`${config.TMDB_API_URL}/tv/${tmdb_id}`, {
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Authorization': `Bearer ${config.TMDB_API_KEY}`
+      }
+    })
+      .then(res => {
+        if (!res.ok)
+          throw new Error('TMDB response was not ok');
+        return res.json()
+      })
+      .then(tmdbData => tmdbData.poster_path)
+      .catch(err => console.log(err))
   },
 
   fetchSearch(searchTerm) {

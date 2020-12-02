@@ -8,5 +8,7 @@ CREATE TABLE show (
   network TEXT NOT NULL,
   updated_at TIMESTAMPTZ NOT NULL,
   aired_episodes INTEGER NOT NULL,
-  status TEXT NOT NULL
+  status TEXT NOT NULL,
+  tmdb_id TEXT NOT NULL,
+  tmdb_image_path TEXT NOT NULL
 );
