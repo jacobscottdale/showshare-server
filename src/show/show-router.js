@@ -51,7 +51,7 @@ showRouter
           // If show is not already in the database, fetch show details from trakt and insert into the database
           ShowService.fetchShow(showId)
             .then(fetchedShow => {
-              ShowService.fetchShowImage(fetchedShow.trakt_id)
+              ShowService.fetchShowImage(fetchedShow.tmdb_id)
                 .then(tmdb_image_path => {
                   const showObject = { ...fetchedShow, tmdb_image_path };
                   ShowService.insertShow(req.app.get('db'), showObject)
@@ -75,8 +75,8 @@ showRouter
     const { searchTerm } = req.params;
     ShowService.fetchSearch(searchTerm)
       .then(showResults => {
-        console.log(showResults);
-        return res.json(showResults);
+        const validResults = showResults.filter(show => show.show.ids.imdb && show.show.ids.tmdb && show.show.ids.tvrage)
+        return res.json(validResults);
       });
 
   });

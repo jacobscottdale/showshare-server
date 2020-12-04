@@ -8,7 +8,6 @@ const { requireAuth } = require('../middleware/jwt-auth');
 accountShowRouter
   .route('/')
   .get(requireAuth, (req, res, next) => {
-    console.log(req.user.user_id);
     AccountShowService.getUserShows(req.app.get('db'), req.user.user_id)
       .then(userShows => {
         let showPromise = userShows.map(userShow =>

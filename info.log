@@ -100,3 +100,18 @@
 {"message":"select * from \"show\" where \"trakt_id\" = $1 limit $2 - invalid input syntax for type integer: \"undefined\"","level":"error"}
 {"message":"select * from \"show\" where \"trakt_id\" = $1 limit $2 - invalid input syntax for type integer: \"undefined\"","level":"error"}
 {"message":"select * from \"show\" where \"trakt_id\" = $1 limit $2 - invalid input syntax for type integer: \"undefined\"","level":"error"}
+{"message":"select * from \"show\" where \"trakt_id\" = $1 limit $2 - invalid input syntax for type integer: \"login\"","level":"error"}
+{"message":"select * from \"show\" where \"trakt_id\" = $1 limit $2 - invalid input syntax for type integer: \"login\"","level":"error"}
+{"message":"select * from \"show\" where \"trakt_id\" = $1 limit $2 - invalid input syntax for type integer: \"login\"","level":"error"}
+{"message":"insert into \"account_has_show\" (\"trakt_id\", \"user_id\", \"watch_status\") values ($1, $2, $3) returning * - insert or update on table \"account_has_show\" violates foreign key constraint \"account_has_show_trakt_id_fkey\"","level":"error"}
+{"message":"insert into \"account_has_show\" (\"trakt_id\", \"user_id\", \"watch_status\") values ($1, $2, $3) returning * - insert or update on table \"account_has_show\" violates foreign key constraint \"account_has_show_trakt_id_fkey\"","level":"error"}
+{"message":"insert into \"account_has_show\" (\"trakt_id\", \"user_id\", \"watch_status\") values ($1, $2, $3) returning * - insert or update on table \"account_has_show\" violates foreign key constraint \"account_has_show_trakt_id_fkey\"","level":"error"}
+{"message":"insert into \"account_has_show\" (\"trakt_id\", \"user_id\", \"watch_status\") values ($1, $2, $3) returning * - insert or update on table \"account_has_show\" violates foreign key constraint \"account_has_show_trakt_id_fkey\"","level":"error"}
+{"message":"insert into \"account_has_show\" (\"trakt_id\", \"user_id\", \"watch_status\") values ($1, $2, $3) returning * - insert or update on table \"account_has_show\" violates foreign key constraint \"account_has_show_trakt_id_fkey\"","level":"error"}
+{"message":"insert into \"account_has_show\" (\"trakt_id\", \"user_id\", \"watch_status\") values ($1, $2, $3) returning * - insert or update on table \"account_has_show\" violates foreign key constraint \"account_has_show_trakt_id_fkey\"","level":"error"}
+{"message":"insert into \"account_has_show\" (\"trakt_id\", \"user_id\", \"watch_status\") values ($1, $2, $3) returning * - insert or update on table \"account_has_show\" violates foreign key constraint \"account_has_show_trakt_id_fkey\"","level":"error"}
+{"message":"insert into \"account_has_show\" (\"trakt_id\", \"user_id\", \"watch_status\") values ($1, $2, $3) returning * - insert or update on table \"account_has_show\" violates foreign key constraint \"account_has_show_trakt_id_fkey\"","level":"error"}
+{"message":"select * from \"show\" where \"trakt_id\" = $1 limit $2 - invalid input syntax for type integer: \"search\"","level":"error"}
+{"message":"insert into \"account_has_show\" (\"trakt_id\", \"user_id\", \"watch_status\") values ($1, $2, $3) returning * - insert or update on table \"account_has_show\" violates foreign key constraint \"account_has_show_trakt_id_fkey\"","level":"error"}
+{"message":"insert into \"account_has_show\" (\"trakt_id\", \"user_id\", \"watch_status\") values ($1, $2, $3) returning * - insert or update on table \"account_has_show\" violates foreign key constraint \"account_has_show_trakt_id_fkey\"","level":"error"}
+{"message":"select * from \"show\" where \"trakt_id\" = $1 limit $2 - invalid input syntax for type integer: \"search\"","level":"error"}

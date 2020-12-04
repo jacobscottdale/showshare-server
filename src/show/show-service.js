@@ -43,6 +43,7 @@ const ShowService = {
         return res.json();
       })
       .then(traktData => {
+        console.log(traktData);
         return {
           trakt_id: traktData.ids.trakt,
           title: traktData.title,
@@ -54,7 +55,7 @@ const ShowService = {
           updated_at: traktData.updated_at,
           aired_episodes: traktData.aired_episodes,
           status: traktData.status,
-          tmdb_id: traktData.ids.tvdb
+          tmdb_id: traktData.ids.tmdb
         };
       })
       .catch(err => {
@@ -72,10 +73,10 @@ const ShowService = {
       .then(res => {
         if (!res.ok)
           throw new Error('TMDB response was not ok');
-        return res.json()
+        return res.json();
       })
       .then(tmdbData => tmdbData.poster_path)
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   },
 
   fetchSearch(searchTerm) {
@@ -90,6 +91,9 @@ const ShowService = {
         if (!res.ok)
           throw new Error('Network response was not ok');
         return res.json();
+      })
+      .then(resJson => {
+        return resJson
       })
       .catch(err => {
         console.log(err);
