@@ -75,10 +75,10 @@ showRouter
     const { searchTerm } = req.params;
     ShowService.fetchSearch(searchTerm)
       .then(showResults => {
-        const validResults = showResults.filter(show => show.show.ids.imdb && show.show.ids.tmdb && show.show.ids.tvrage)
+        const validResults = showResults.filter(show => show.show.ids.imdb && show.show.ids.tmdb);
         return res.json(validResults);
-      });
-
+      })
+      .catch(next);
   });
 
 module.exports = showRouter;
