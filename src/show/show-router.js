@@ -75,7 +75,7 @@ showRouter
     const { searchTerm } = req.params;
     ShowService.fetchSearch(searchTerm)
       .then(showResults => {
-        const validResults = showResults.filter(show => show.show.ids.imdb && show.show.ids.tmdb);
+        const validResults = showResults.filter(show => (show.show.ids.imdb && show.show.ids.tmdb) && show.score > 1000);
         return res.json(validResults);
       })
       .catch(next);
