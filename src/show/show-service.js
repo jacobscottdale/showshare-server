@@ -72,7 +72,7 @@ const ShowService = {
     })
       .then(res => {
         if (!res.ok)
-          return 'false';
+          return { poster_path: 'false' };
         return res.json();
       })
       .then(tmdbData => tmdbData.poster_path)
