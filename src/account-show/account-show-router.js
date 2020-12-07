@@ -31,13 +31,22 @@ accountShowRouter
 
     const user_id = req.user.user_id;
     const { trakt_id, watch_status } = req.body;
-    
-    AccountShowService.insertUserShow(req.app.get('db'), user_id, trakt_id, watch_status)
-      .then(userShow =>
-        res.status(201)
-          .location(path.posix.join(req.originalUrl, `/${userShow.user_id}`))
-          .send(userShow)
-      )
+
+    AccountShowService.getUserShows(req.app.get('db'), user_id)
+      .then(userShows => {
+        if (userShows.find(show => show.trakt_id === trakt_id)) {
+          return res.status(400).json({
+            error: `User already has show with trakt_id ${trakt_id}`
+          });
+        } else {
+          AccountShowService.insertUserShow(req.app.get('db'), user_id, trakt_id, watch_status)
+            .then(userShow =>
+              res.status(201)
+                .location(path.posix.join(req.originalUrl, `/${userShow.user_id}`))
+                .send(userShow)
+            );
+        }
+      })
       .catch(next);
   })
   .patch(requireAuth, bodyParser, (req, res, next) => {

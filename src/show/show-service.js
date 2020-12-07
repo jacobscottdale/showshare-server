@@ -72,10 +72,10 @@ const ShowService = {
     })
       .then(res => {
         if (!res.ok)
-          return { poster_path: 'false' };
+          throw new Error('TMDB fetch unsuccessful');
         return res.json();
       })
-      .then(tmdbData => tmdbData.poster_path)
+      .then(tmdbData => (tmdbData.poster_path) ? tmdbData.poster_path : 'false')
       .catch(err => console.log(err));
   },
 
@@ -93,7 +93,7 @@ const ShowService = {
         return res.json();
       })
       .then(resJson => {
-        return resJson
+        return resJson;
       })
       .catch(err => {
         console.log(err);
