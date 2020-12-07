@@ -72,7 +72,7 @@ const ShowService = {
     })
       .then(res => {
         if (!res.ok)
-          throw new Error('TMDB response was not ok');
+          return 'false';
         return res.json();
       })
       .then(tmdbData => tmdbData.poster_path)

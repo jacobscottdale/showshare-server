@@ -10,5 +10,5 @@ CREATE TABLE show (
   aired_episodes INTEGER NOT NULL,
   status TEXT NOT NULL,
   tmdb_id TEXT NOT NULL,
-  tmdb_image_path TEXT NOT NULL DEFAULT "false"
+  tmdb_image_path TEXT NOT NULL
 );
