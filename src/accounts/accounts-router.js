@@ -13,24 +13,38 @@ accountsRouter
   .get(requireAuth, (req, res, next) => {
     const knexInstance = req.app.get('db');
     AccountsService.getAllAccounts(knexInstance)
-      .then(accounts => {
-        res.json(accounts);
-      })
+      .then(accounts => res.json(accounts))
       .catch(next);
   })
   .post(bodyParser, (req, res, next) => {
-    const { password, username, first_name, last_name } = req.body;
+    const {
+      password,
+      username,
+      first_name,
+      last_name
+    } = req.body;
 
-    for (const field of ['first_name', 'last_name', 'username', 'password'])
+    for (const field of [
+      'first_name',
+      'last_name',
+      'username',
+      'password'
+    ])
       if (!req.body[field])
-        return res.status(400).json({
-          error: `Missing '${field}' in request body`
-        });
+        return res
+          .status(400)
+          .json({
+            error: `Missing '${field}' in request body`
+          });
 
     const passwordError = AccountsService.validatePassword(password);
 
     if (passwordError)
-      return res.status(400).json({ error: passwordError });
+      return res
+        .status(400)
+        .json({
+          error: passwordError
+        });
 
     AccountsService.usernameInUse(
       req.app.get('db'),
@@ -38,7 +52,11 @@ accountsRouter
     )
       .then(usernameInUse => {
         if (usernameInUse)
-          return res.status(400).json({ error: `Username already taken` });
+          return res
+            .status(400)
+            .json({
+              error: `Username already taken`
+            });
         return AccountsService.hashPassword(password)
           .then(hashedPassword => {
             const newAccount = {
@@ -60,15 +78,22 @@ accountsRouter
                 )
                   .then(dbUser => {
                     if (!dbUser)
-                      return res.status(400).json({
-                        error: 'Incorrect username or password',
-                      });
-                    return AuthService.comparePasswords(password, dbUser.password)
+                      return res
+                        .status(400)
+                        .json({
+                          error: 'Incorrect username or password',
+                        });
+                    return AuthService.comparePasswords(
+                      password,
+                      dbUser.password
+                    )
                       .then(compareMatch => {
                         if (!compareMatch)
-                          return res.status(400).json({
-                            error: 'Incorrect username or password',
-                          });
+                          return res
+                            .status(400)
+                            .json({
+                              error: 'Incorrect username or password',
+                            });
                         const sub = dbUser.username;
                         const payload = { user_id: dbUser.user_id };
                         res
@@ -89,12 +114,17 @@ accountsRouter
   .route('/:id')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db');
-    AccountsService.getById(knexInstance, req.params.id)
+    AccountsService.getById(
+      knexInstance,
+      req.params.id
+    )
       .then(account => {
         if (!account) {
-          return res.status(404).json({
-            error: { message: `Account doesn't exist` }
-          });
+          return res
+            .status(404)
+            .json({
+              error: { message: `Account doesn't exist` }
+            });
         }
         res.json(account);
       })
@@ -102,15 +132,21 @@ accountsRouter
   })
   .delete(requireAuth, (req, res, next) => {
     const knexInstance = req.app.get('db');
-    AccountsService.getById(knexInstance, req.params.id)
+    AccountsService.getById(
+      knexInstance,
+      req.params.id
+    )
       .then(account => {
         if (!account) {
-          return res.status(404).json({
-            error: { message: `Account doesn't exist` }
-          });
+          return res
+            .status(404)
+            .json({
+              error: { message: `Account doesn't exist` }
+            });
         } else {
           AccountsService.deleteAccount(
-            knexInstance, req.params.user_id
+            knexInstance,
+            req.params.user_id
           )
             .then(res.status(204).end());
         }

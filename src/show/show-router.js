@@ -18,19 +18,43 @@ showRouter
       .catch(next);
   })
   .post(bodyParser, (req, res, next) => {
-    for (const field of ['trakt_id', 'title', 'slug', 'imdb_id', 'year', 'overview', 'network', 'updated_at', 'aired_episodes', 'status', 'tvdb_id'])
+    for (const field of [
+      'trakt_id',
+      'title',
+      'slug',
+      'imdb_id',
+      'year',
+      'overview',
+      'network',
+      'updated_at',
+      'aired_episodes',
+      'status',
+      'tvdb_id'])
       if (!req.body[field])
-        return res.status(400).json({
-          error: `Missing '${field}' in request body`
-        });
+        return res
+          .status(400)
+          .json({
+            error: `Missing '${field}' in request body`
+          });
 
-    ShowService.idInUse(req.app.get('db'), req.body.trakt_id)
+    ShowService.idInUse(
+      req.app.get('db'),
+      req.body.trakt_id
+    )
       .then(idInUse => {
         if (idInUse)
-          return res.status(400).json({ error: 'Show already exists in database' });
-        ShowService.insertShow(req.app.get('db'), req.body)
+          return res
+            .status(400)
+            .json({
+              error: 'Show already exists in database'
+            });
+        ShowService.insertShow(
+          req.app.get('db'),
+          req.body
+        )
           .then(show => {
-            return res.status(201)
+            return res
+              .status(201)
               .location(path.posix.join(req.originalUrl, `/${show.trakt_id}`))
               .send(show);
           });
@@ -54,10 +78,12 @@ showRouter
               ShowService.fetchShowImage(fetchedShow.tmdb_id)
                 .then(tmdb_image_path => {
                   const showObject = { ...fetchedShow, tmdb_image_path };
-                  ShowService.insertShow(req.app.get('db'), showObject)
-                    .then(insertedShow => {
-                      return res.json(insertedShow);
-                    });
+                  ShowService.insertShow(
+                    req.app.get('db'),
+                    showObject
+                  )
+                    .then(insertedShow => res.json(insertedShow)
+                    );
                 });
             })
             .catch(next);
@@ -75,7 +101,10 @@ showRouter
     const { searchTerm } = req.params;
     ShowService.fetchSearch(searchTerm)
       .then(showResults => {
-        const validResults = showResults.filter(show => show.show.ids.imdb && show.show.ids.tmdb);
+        const validResults = showResults.filter(show => show.show.ids.imdb
+          && show.show.ids.tmdb
+          && show.overview
+          && show.network);
         return res.json(validResults);
       })
       .catch(next);
