@@ -4,6 +4,14 @@ const ShowService = require('./show-service');
 const showRouter = express.Router();
 const bodyParser = express.json();
 
+const validateResults = showResults => {
+  const hasIds = showResults.filter(showObj => showObj.show.ids.imdb
+    && showObj.show.ids.tmdb);
+  const tmdbIds = hasIds.map(showObj => showObj.show.ids.tmdb)
+  const filtered = hasIds.filter((showObj, index) => !tmdbIds.includes(showObj.show.ids.tmdb, index + 1))
+  return filtered
+}
+
 showRouter
   .route('/')
   .get((req, res, next) => {
@@ -100,13 +108,7 @@ showRouter
   .get((req, res, next) => {
     const { searchTerm } = req.params;
     ShowService.fetchSearch(searchTerm)
-      .then(showResults => {
-        const validResults = showResults.filter(show => show.show.ids.imdb
-          && show.show.ids.tmdb
-          && show.overview
-          && show.network);
-        return res.json(validResults);
-      })
+      .then(showResults => res.json(validateResults(showResults)))
       .catch(next);
   });
 

@@ -5,7 +5,7 @@ CREATE TABLE show (
   imdb_id TEXT NOT NULL,
   year INTEGER NOT NULL,
   overview TEXT NOT NULL,
-  network TEXT NOT NULL,
+  network TEXT DEFAULT 'Unknown',
   updated_at TIMESTAMPTZ NOT NULL,
   aired_episodes INTEGER NOT NULL,
   status TEXT NOT NULL,

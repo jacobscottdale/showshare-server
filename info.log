@@ -118,3 +118,7 @@
 {"message":"select * from \"show\" where \"trakt_id\" = $1 limit $2 - invalid input syntax for type integer: \"undefined\"","level":"error"}
 {"message":"select * from \"show\" where \"trakt_id\" = $1 limit $2 - invalid input syntax for type integer: \"undefined\"","level":"error"}
 {"message":"select * from \"show\" where \"trakt_id\" = $1 limit $2 - invalid input syntax for type integer: \"undefined\"","level":"error"}
+{"message":"Cannot read property 'tmdb' of undefined","level":"error"}
+{"message":"show is not defined","level":"error"}
+{"message":"showObj is not defined","level":"error"}
+{"message":"tmdbs is not defined","level":"error"}
