@@ -43,7 +43,6 @@ const ShowService = {
         return res.json();
       })
       .then(traktData => {
-        console.log(traktData);
         return {
           trakt_id: traktData.ids.trakt,
           title: traktData.title,
@@ -89,11 +88,11 @@ const ShowService = {
     })
       .then(res => {
         if (!res.ok)
-          throw new Error('Network response was not ok');
+          throw new Error('Trakt response was not ok');
         return res.json();
       })
-      .then(resJson => {
-        return resJson;
+      .then(traktData => {
+        return traktData;
       })
       .catch(err => {
         console.log(err);

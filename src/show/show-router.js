@@ -7,10 +7,10 @@ const bodyParser = express.json();
 const validateResults = showResults => {
   const hasIds = showResults.filter(showObj => showObj.show.ids.imdb
     && showObj.show.ids.tmdb);
-  const tmdbIds = hasIds.map(showObj => showObj.show.ids.tmdb)
-  const filtered = hasIds.filter((showObj, index) => !tmdbIds.includes(showObj.show.ids.tmdb, index + 1))
-  return filtered
-}
+  const tmdbIds = hasIds.map(showObj => showObj.show.ids.tmdb);
+  const filtered = showResults.filter((showObj, index) => !tmdbIds.includes(showObj.show.ids.tmdb, index + 1));
+  return filtered;
+};
 
 showRouter
   .route('/')
@@ -21,7 +21,9 @@ showRouter
           return res.status(400).json({
             error: 'No shows available',
           });
-        return res.json(shows);
+        return res
+          .status(200)
+          .json(shows);
       })
       .catch(next);
   })
@@ -64,7 +66,7 @@ showRouter
             return res
               .status(201)
               .location(path.posix.join(req.originalUrl, `/${show.trakt_id}`))
-              .send(show);
+              .json(show);
           });
       })
       .catch(next);
@@ -90,14 +92,18 @@ showRouter
                     req.app.get('db'),
                     showObject
                   )
-                    .then(insertedShow => res.json(insertedShow)
+                    .then(insertedShow => res
+                      .status(200)
+                      .json(insertedShow)
                     );
                 });
             })
             .catch(next);
         } else {
           // If show is already in the database simply return the database entry
-          return res.json(dbShow);
+          return res
+            .status(200)
+            .json(dbShow);
         }
       })
       .catch(next);
@@ -108,7 +114,9 @@ showRouter
   .get((req, res, next) => {
     const { searchTerm } = req.params;
     ShowService.fetchSearch(searchTerm)
-      .then(showResults => res.json(validateResults(showResults)))
+      .then(showResults => res
+        .status(200)
+        .json(validateResults(showResults)))
       .catch(next);
   });
 

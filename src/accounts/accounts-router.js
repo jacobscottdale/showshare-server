@@ -13,7 +13,7 @@ accountsRouter
   .get(requireAuth, (req, res, next) => {
     const knexInstance = req.app.get('db');
     AccountsService.getAllAccounts(knexInstance)
-      .then(accounts => res.json(accounts))
+      .then(accounts => res.status(200).json(accounts))
       .catch(next);
   })
   .post(bodyParser, (req, res, next) => {
@@ -99,7 +99,7 @@ accountsRouter
                         res
                           .status(201)
                           .location(path.posix.join(req.originalUrl, `/${account.user_id}`))
-                          .send({
+                          .json({
                             authToken: AuthService.createJwt(sub, payload),
                           });
                       });
@@ -126,7 +126,7 @@ accountsRouter
               error: { message: `Account doesn't exist` }
             });
         }
-        res.json(account);
+        res.status(200).json(account);
       })
       .catch(next);
   })
