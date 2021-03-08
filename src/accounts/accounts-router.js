@@ -34,7 +34,10 @@ accountsRouter
         return res
           .status(400)
           .json({
-            error: `Missing '${field}' in request body`
+            error: {
+              field: field,
+              message: `Missing '${field}' in request body`
+            }
           });
 
     const passwordError = AccountsService.validatePassword(password);
@@ -43,7 +46,10 @@ accountsRouter
       return res
         .status(400)
         .json({
-          error: passwordError
+          error: {
+            field: 'password',
+            message: passwordError
+          }
         });
 
     AccountsService.usernameInUse(
@@ -55,7 +61,10 @@ accountsRouter
           return res
             .status(400)
             .json({
-              error: `Username already taken`
+              error: {
+                field: 'username',
+                message: `Username already taken`
+              }
             });
         return AccountsService.hashPassword(password)
           .then(hashedPassword => {
