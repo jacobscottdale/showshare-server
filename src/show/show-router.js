@@ -37,6 +37,7 @@ showRouter
       'overview',
       'network',
       'updated_at',
+      'runtime',
       'aired_episodes',
       'status',
       'tvdb_id'])
@@ -92,10 +93,11 @@ showRouter
                     req.app.get('db'),
                     showObject
                   )
-                    .then(insertedShow => res
-                      .status(200)
-                      .json(insertedShow)
-                    );
+                    .then(insertedShow => {
+                      return res
+                        .status(200)
+                        .json(insertedShow);
+                    });
                 });
             })
             .catch(next);

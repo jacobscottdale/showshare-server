@@ -53,6 +53,7 @@ const ShowService = {
           network: traktData.network,
           updated_at: traktData.updated_at,
           aired_episodes: traktData.aired_episodes,
+          runtime: traktData.runtime,
           status: traktData.status,
           tmdb_id: traktData.ids.tmdb
         };
@@ -63,6 +64,7 @@ const ShowService = {
   },
 
   fetchShowImage(tmdb_id) {
+    console.log(tmdb_id)
     return fetch(`${config.TMDB_API_URL}/tv/${tmdb_id}`, {
       headers: {
         'Content-Type': 'application/json; charset=utf-8',

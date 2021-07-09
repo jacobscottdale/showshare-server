@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const AccountShowService = require('./account-show-service');
+const AccountsService = require('../accounts/accounts-service');
 const accountShowRouter = express.Router();
 const bodyParser = express.json();
 const { requireAuth } = require('../middleware/jwt-auth');
@@ -62,12 +63,30 @@ accountShowRouter
             trakt_id,
             watch_status
           )
-            .then(userShow =>
-              res
+            .then(userShow => {
+              AccountsService.getAccountWatchTime(
+                req.app.get('db'),
+                user_id
+              )
+                .then(watchedShows => {
+
+                  let watched_time = 0;
+                  watchedShows.forEach(({ runtime, aired_episodes }) => {
+                    watched_time += runtime * aired_episodes;
+                  });
+
+                  AccountsService.updateAccount(
+                    req.app.get('db'),
+                    user_id,
+                    { watched_time }
+                  ).then(watched_time);
+                });
+
+              return res
                 .status(201)
                 .location(path.posix.join(req.originalUrl, `/${userShow.user_id}`))
-                .send(userShow)
-            );
+                .json(userShow);
+            });
         }
       })
       .catch(next);
@@ -93,12 +112,29 @@ accountShowRouter
       trakt_id,
       watch_status
     )
-      .then(userShow =>
-        res
+      .then(userShow => {
+        AccountsService.getAccountWatchTime(
+          req.app.get('db'),
+          user_id
+        )
+          .then(watchedShows => {
+
+            let watched_time = 0;
+            watchedShows.forEach(({ runtime, aired_episodes }) => {
+              watched_time += runtime * aired_episodes;
+            });
+
+            AccountsService.updateAccount(
+              req.app.get('db'),
+              user_id,
+              { watched_time }
+            ).then(watched_time);
+          });
+        return res
           .status(201)
           .location(path.posix.join(req.originalUrl, `/${userShow.user_id}`))
-          .send(userShow)
-      )
+          .json(userShow);
+      })
       .catch(next);
   })
   .delete(requireAuth, bodyParser, (req, res, next) => {

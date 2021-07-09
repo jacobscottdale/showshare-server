@@ -125,3 +125,5 @@
 {"message":"select * from \"show\" where \"trakt_id\" = $1 limit $2 - invalid input syntax for type integer: \"login\"","level":"error"}
 {"message":"select * from \"show\" where \"trakt_id\" = $1 limit $2 - invalid input syntax for type integer: \"login\"","level":"error"}
 {"message":"select * from \"show\" where \"trakt_id\" = $1 limit $2 - invalid input syntax for type integer: \"search\"","level":"error"}
+{"message":"select * from \"show\" where \"trakt_id\" = $1 limit $2 - invalid input syntax for type integer: \"game-of-thrones\"","level":"error"}
+{"message":"select * from \"show\" where \"trakt_id\" = $1 limit $2 - invalid input syntax for type integer: \"game-of-thrones\"","level":"error"}

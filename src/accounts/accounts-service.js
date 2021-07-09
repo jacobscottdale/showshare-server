@@ -17,18 +17,39 @@ const AccountsService = {
   },
 
   getById(db, id) {
-    return db.from('accounts').select('*').where('user_id', id).first();
+    return db
+      .from('accounts')
+      .select('*')
+      .where('user_id', id)
+      .first();
+  },
+
+  getAccountWatchTime(db, id) {
+    return db
+      .select('s.runtime', 's.aired_episodes')
+      .from('show as s')
+      .leftJoin('account_has_show as ahs', {'s.trakt_id': 'ahs.trakt_id', 'ahs.user_id': id})
+      .where({'watch_status': 'watched' })
+  },
+
+  getAccountWantTime(db, id) {
+    return db
+      .select('s.runtime', 's.aired_episodes')
+      .from('show as s')
+      .leftJoin('account_has_show as ahs', {'s.trakt_id': 'ahs.trakt_id', 'ahs.user_id': id})
+      .where({'watch_status': 'want' })
   },
 
   deleteAccount(db, id) {
     return db('accounts')
-      .where({ 'user_id': id })
+      .where('user_id', id)
       .delete();
   },
 
   updateAccount(db, id, newAccountFields) {
+
     return db('accounts')
-      .where({ id })
+      .where('user_id', id )
       .update(newAccountFields);
   },
 
@@ -62,6 +83,8 @@ const AccountsService = {
       last_name: account.last_name,
       username: account.username,
       date_created: new Date(account.created_on),
+      watched_time: account.watched_time,
+      unwatched_time: account.unwatched_time
     };
   },
 

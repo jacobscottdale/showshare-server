@@ -4,6 +4,8 @@ CREATE TABLE accounts (
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
   password TEXT NOT NULL,
+  watched_time INTEGER NOT NULL DEFAULT 0,
+  unwatched_time INTEGER NOT NULL DEFAULT 0,
   created_on TIMESTAMPTZ NOT NULL DEFAULT now(),
   last_login TIMESTAMPTZ
 );
